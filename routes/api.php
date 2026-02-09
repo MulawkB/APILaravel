@@ -8,6 +8,6 @@ Route::get('/ping', function () {
 return response()->json([
 'message' => 'pong',
 ]);
-});
 
+});
 Route::apiResource('books', BookController::class);
