@@ -31,10 +31,10 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
-            'title'   => 'required|string|max:255',
-            'author'  => 'required|string|max:255',
-            'summary' => 'required|string',
-            'isbn'    => 'required|string|unique:books,isbn,' . $book->id,
+            'title'   => 'required|string|min:3|max:255',
+            'author'  => 'required|string|min:3|max:100',
+            'summary' => 'required|string|min:10|max:500',
+            'isbn'    => 'required|string|size:13|unique:books,isbn,' . $book->id,
         ]);
 
         $book->update($validated);
