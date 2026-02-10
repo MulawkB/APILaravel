@@ -20,7 +20,6 @@ Route::get('/books/{book}', [BookController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/books', [BookController::class, 'store']);
-    Route::put('/books/{book}', [BookController::class, 'update']);
-    Route::patch('/books/{book}', [BookController::class, 'update']);
+    Route::match(['PUT', 'PATCH'], '/books/{book}', [BookController::class, 'update']);
     Route::delete('/books/{book}', [BookController::class, 'destroy']);
 });
