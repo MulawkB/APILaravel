@@ -12,9 +12,11 @@ return response()->json([
 
 });
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
-Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
+Route::middleware('throttle:10,1')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
+});
 
+Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{book}', [BookController::class, 'show']);
 
