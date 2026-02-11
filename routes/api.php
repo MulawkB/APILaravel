@@ -18,10 +18,10 @@ Route::middleware('throttle:10,1')->group(function () {
 Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
-Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('book.show');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/books', [BookController::class, 'store'])->name('books.store');
-    Route::match(['PUT', 'PATCH'], '/books/{book}', [BookController::class, 'update'])->name('books.update');
-    Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::post('/books', [BookController::class, 'store'])->name('book.store');
+    Route::match(['PUT', 'PATCH'], '/books/{book}', [BookController::class, 'update'])->name('book.update');
+    Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('book.destroy');
 });
