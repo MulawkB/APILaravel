@@ -28,7 +28,7 @@ class BookController extends Controller
     }
     public function show(Book $book)
     {
-        $cachedbook = Cache::remember("book_{$book->id}", 3600, function () use ($book) {
+        $cachedbook = Cache::remember("book-{$book->id}", 3600, function () use ($book) {
              return $book;
         });
         return new BookResource($cachedbook);
@@ -43,14 +43,14 @@ class BookController extends Controller
         ]);
 
         $book->update($validated);
-
+        Cache::forget("book-{$book->id}");
         return new BookResource($book);
     }
 
     public function destroy(Book $book)
     {
         $book->delete();
-
+        Cache::forget("book-{$book->id}");
         return response()->noContent();
     }
 }
