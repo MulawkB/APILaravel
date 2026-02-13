@@ -52,7 +52,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:3|max:255',
             'author' => 'required|string|min:3|max:100',
-            'summary' => 'required|text|min:10|max:500',
+            'summary' => 'required|string|min:10|max:500',
             'isbn' => 'required|string|size:13|unique:books,isbn',
         ]);
         $book = Book::create($validated);
