@@ -50,6 +50,9 @@ class BookCreationTest extends TestCase
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['title', 'author', 'summary', 'isbn']);
+        $this->assertDatabaseMissing('books', [
+        'isbn' => '1234567890124',
+        ]);
     }
     public function test_book_creation_unauthenticated()
     {
@@ -63,5 +66,8 @@ class BookCreationTest extends TestCase
         $response = $this->postJson('/api/v1/books', $bookData);
 
         $response->assertStatus(401);
+        $this->assertDatabaseMissing('books', [
+        'isbn' => '1234567890124',
+        ]);
     }
 }
